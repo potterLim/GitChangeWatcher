@@ -1,0 +1,86 @@
+# Visual Studio 관련
+.vs/
+*.user
+*.suo
+*.vcxproj.user
+*.pdb
+*.opendb
+*.VC.db
+ipch/
+*.aps
+*.ncb
+*.res
+*.ilk
+*.log
+*.tlog
+*.lastbuildstate
+*.sdf
+*.opensdf
+*.unsuccessfulbuild
+*.buildstate
+*.cachefile
+*.Cache
+Backup*/
+
+# Windows 관련
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# 빌드 출력 디렉토리
+bin/
+obj/
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+*.DLL
+*.EXE
+*.COM
+*.SO
+*.o
+*.a
+
+# .NET Core 및 NuGet 관련
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nuget.props
+*.nuget.targets
+packages/
+*.nupkg
+*.snupkg
+*.nuspec
+*.symbols.nupkg
+*.vsix
+.env
+
+# 배포 관련 파일
+publish/
+app.publish/
+*.publishsettings
+*.pubxml
+*.wixpdb
+*.wixproj.*
+
+# 일반 설정 및 로그
+*.csproj.user
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.csprojAssemblyReference.cache
+*.log
+*.tlog
+
+# 텍스트 편집기 관련
+*.swp
+*~.nib
+*.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# 환경설정 파일
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
