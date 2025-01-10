@@ -202,6 +202,7 @@ namespace GitChangeWatcher
             Invoke(new Action(() =>
             {
                 mPendingFullPath = e.FullPath;
+                // 레포지토리 루트 이름 포함하여 보여줄 경로
                 mPendingDisplayPath = GetDisplayPathFromRepoRoot(e.FullPath);
 
                 lblFilePath.Text = $"파일 경로: {mPendingDisplayPath}";
@@ -266,21 +267,24 @@ namespace GitChangeWatcher
                     return;
                 }
 
+                // 내부적으로 Git 명령을 사용할 때는 "상대 경로"가 필요하므로 그대로 둠
                 string relativePath = Path.GetRelativePath(mRepoPath, mPendingFullPath);
                 string commitMessage = GitHelper.GenerateCommitMessage(mPendingFullPath);
 
-                // Git 명령 실행
+                // Git 명령 실행 (상대 경로 사용)
                 GitHelper.ExecuteGitCommands(mRepoPath, relativePath, commitMessage);
 
-                // 로그 기록
+                // 로그 기록 (repoName은 Log 파일명을 구성할 때 필요)
                 CommitLogManager.AppendLog(GetRepoName(), relativePath, commitMessage);
 
+                // 최근 변경된 파일 정보는 "사용자에게 보여줄 경로(mPendingDisplayPath)"로 저장
                 mLastModifiedFilePath = mPendingFullPath;
                 mLastCommitMessage = commitMessage;
-                mLastDisplayPath = relativePath;
+                mLastDisplayPath = mPendingDisplayPath;
 
+                // 사용자에게는 레포지토리 루트 이름 포함 경로(mPendingDisplayPath)를 보여줌
                 MessageBox.Show(
-                    $"파일: {relativePath}\n커밋 메시지: {commitMessage}\n\n변경 사항이 성공적으로 푸쉬되었습니다!",
+                    $"파일: {mPendingDisplayPath}\n커밋 메시지: {commitMessage}\n\n변경 사항이 성공적으로 푸쉬되었습니다!",
                     "작업 완료",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
@@ -335,6 +339,7 @@ namespace GitChangeWatcher
         {
             if (!string.IsNullOrEmpty(mLastModifiedFilePath) && !string.IsNullOrEmpty(mLastCommitMessage))
             {
+                // 최근 변경된 파일에 대해서도 사용자에게 보여줄 경로는 mLastDisplayPath(= 레포지토리 루트 포함)
                 lblFilePath.Text = $"최근 파일: {mLastDisplayPath}";
                 lblCommitMessage.Text = $"커밋 메시지: {mLastCommitMessage}";
             }
@@ -374,7 +379,7 @@ namespace GitChangeWatcher
 
         /// <summary>
         /// repoPath에서 마지막 폴더명을 추출하여 레포지토리 이름으로 사용합니다.
-        /// 예: C:\path\gitrepo -> gitrepo
+        /// (commit 로그 파일명 "commits_{repoName}.log" 등에 쓰이므로 삭제하면 안 됩니다.)
         /// </summary>
         private string GetRepoName()
         {
