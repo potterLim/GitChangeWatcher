@@ -20,11 +20,12 @@
 ## 2. 설치 및 실행
 
 ### 2.1. 프로그램 다운로드
-- `GitChangeWatcher.exe` 파일을 원하는 폴더에 저장합니다.
+- [GitChangeWatcher.zip](./GitChangeWatcher.zip) 파일을 다운로드한 후, 원하는 폴더에 압축을 해제합니다.
 
 ### 2.2. 최초 실행
-- 프로그램 실행 시 **Git 저장소 루트 디렉토리**를 선택하는 폴더 브라우저가 열립니다.
-- 선택한 경로는 `%AppData%\GitChangeWatcher\repoPath.txt`에 저장되며, 이후 실행 시 자동으로 로드됩니다.
+1. 압축 해제된 폴더 내에서 `GitChangeWatcher.exe`를 실행합니다.
+2. 프로그램 실행 시 **Git 저장소 루트 디렉토리**를 선택하는 폴더 브라우저가 열립니다.
+3. 선택한 경로는 `%AppData%\GitChangeWatcher\repoPath.txt`에 저장되며, 이후 실행 시 자동으로 로드됩니다.
 
 ### 2.3. 트레이 아이콘 등록
 - 프로그램 실행 후 **작업 표시줄 오른쪽(시스템 트레이)** 에 아이콘이 등록됩니다.
